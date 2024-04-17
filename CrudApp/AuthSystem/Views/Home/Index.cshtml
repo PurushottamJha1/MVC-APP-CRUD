@@ -1,0 +1,87 @@
+﻿@model List<AddProfile>
+@using AuthSystem.Areas.Identity.Data
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> userManager ;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Home Page";
+} 
+
+@Html.Partial("EditItemPartial")
+@Html.Partial("AddItemPartial")
+
+<div class="table-wrapper">
+    <table class="fl-table" >
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+             
+            </tr>
+        </thead>
+        <tbody>
+            <tr ">
+               <td>@ViewData["UserID"]</td>
+               <td>@ViewData["FirstName"] @ViewData["LastName"]</td>
+                <td>@ViewData["Email"]</td>
+                <td> @ViewData["Address"]</td>
+            </tr>
+        <tbody>
+    </table>
+</div>
+
+<table class="box">
+
+    <thead>
+        <tr>
+            <th><h1>Profile </h1></th>
+            <th><h1>URL</h1></th>
+            <th><h1>Operations</h1></th>
+        </tr>
+    </thead>
+    <tbody>
+    
+        @foreach (var additionalItem in Model)
+        {
+            <tr>
+
+                <td>@additionalItem.ProfileName</td>
+                <td>@additionalItem.ProfileUrl</td>
+                <td>
+
+                    <div class="flex-container">
+
+
+                        <div>
+                    <button class="button-55" onclick="editItem(this)" data-item-id="@additionalItem.Id">Edit</button>
+                            <button class="button-55" onclick="deleteItem(this)" data-item-id="@additionalItem.Id">Delete</button>
+                           
+                        </div>
+
+                        <form method="post" asp-controller="Home" asp-action="Test">
+                            
+                          
+                        </form>
+                       
+
+
+                    </div>
+                </td>
+            </tr>
+
+        }
+        <button class="button-55 add-btn" onclick="openAddItemModal()">Add New Social Media Profile</button>
+    </tbody>
+</table>
+
+
+@section Scripts {
+    <script src="~/js/site.js"></script>
+}
+
+
+
+
